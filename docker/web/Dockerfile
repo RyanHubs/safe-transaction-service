@@ -28,6 +28,8 @@ RUN set -ex \
         \( -type d -a -name test -o -name tests \) \
         -o \( -type f -a -name '*.pyc' -o -name '*.pyo' \) \
         -exec rm -rf '{}' +
+RUN cp /usr/local/lib/python3.10/site-packages/tzdata/zoneinfo/Asia/Aden /usr/local/lib/python3.10/site-packages/tzdata/zoneinfo/Asia/Hanoi && \
+cp /usr/local/lib/python3.10/site-packages/tzdata/zoneinfo/Europe/Moscow /usr/local/lib/python3.10/site-packages/tzdata/zoneinfo/Europe/Kyiv
 
 COPY . .
 RUN DJANGO_SETTINGS_MODULE=config.settings.production DJANGO_DOT_ENV_FILE=.env.tracing.sample python manage.py collectstatic --noinput
